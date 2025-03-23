@@ -9,9 +9,10 @@ import Foundation
 import MapKit
 
 // Helper struct for map annotations
-struct Location: Identifiable {
+struct Location: Identifiable, Hashable {
     let id = UUID()
     let mapItem: MKMapItem
+
     var coordinate: CLLocationCoordinate2D {
         mapItem.placemark.coordinate
     }
@@ -41,5 +42,13 @@ struct Location: Identifiable {
         }
 
         return addressString
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: Location, rhs: Location) -> Bool {
+        lhs.id == rhs.id
     }
 }
