@@ -37,6 +37,13 @@ struct ContentView: View {
 					.tint(.red)
 					.tag(location)
 			}
+
+			// Display routes if available
+			ForEach(mapViewModel.routes.indices, id: \.self) { index in
+				let route = mapViewModel.routes[index]
+				MapPolyline(route.polyline)
+					.stroke(.blue, lineWidth: 5)
+			}
 		}
 		.mapStyle(.standard)
 		.onMapCameraChange { context in
@@ -79,14 +86,6 @@ struct ContentView: View {
 				)
 			}
 		}
-	}
-
-	private func updateRegionFromContext(_ context: MapCameraUpdateContext) {
-		let newRegion = MKCoordinateRegion(
-			center: context.region.center, 
-			span: context.region.span
-		)
-		mapViewModel.region = newRegion
 	}
 	
 	private func setupInitialPosition() {

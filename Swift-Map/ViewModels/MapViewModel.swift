@@ -55,12 +55,12 @@ class MapViewModel: ObservableObject {
 
         let directions = MKDirections(request: request)
         directions.calculate { [weak self] response, error in 
-			  guard let self = self, let _ = response?.routes.first else {
+            guard let self = self, let response = response else {
                 print("Error getting directions: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
 
-            self.routes = response?.routes ?? []
+            self.routes = response.routes
             self.showDirections = true
         }
     }
