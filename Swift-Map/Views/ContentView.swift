@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 
+@available(iOS 17.0, *)
 struct ContentView: View {
 	@EnvironmentObject private var locationManager: LocationManager
 	@EnvironmentObject private var mapViewModel: MapViewModel
@@ -107,7 +108,11 @@ struct ContentView: View {
 }
 
 #Preview {
-	ContentView()
-		.environmentObject(LocationManager())
-		.environmentObject(MapViewModel())
+	if #available(iOS 17.0, *) {
+		ContentView()
+			.environmentObject(LocationManager())
+			.environmentObject(MapViewModel())
+	} else {
+		// Fallback on earlier versions
+	}
 }
