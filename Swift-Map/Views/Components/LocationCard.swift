@@ -18,7 +18,7 @@ struct LocationCard: View {
             Text(mapItem.name ?? "Unknown location")
                 .font(.headline)
 
-            if let address = mapItem.placemark.thoroughfare {
+            if let address = mapItem.placemark.title {
                 Text(address)
                     .font(.subheadline)
                     .foregroundColor(.secondary)

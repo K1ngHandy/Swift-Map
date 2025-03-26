@@ -14,9 +14,13 @@ struct Swift_MapApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(locationManager)
-                .environmentObject(mapViewModel)
+			  if #available(iOS 17.0, *) {
+				  ContentView()
+					  .environmentObject(locationManager)
+					  .environmentObject(mapViewModel)
+			  } else {
+				  // Fallback on earlier versions
+			  }
         }
     }
 }

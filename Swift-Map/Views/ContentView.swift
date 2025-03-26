@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 @available(iOS 17.0, *)
 struct ContentView: View {
@@ -24,7 +25,9 @@ struct ContentView: View {
 			overlayView
 		}
 		.onAppear(perform: setupInitialPosition)
-		.onChange(of: locationManager.userLocation, perform: handleLocationChange)
+		.onChange(of: locationManager.userLocation) { oldValue, newValue in
+			handleLocationChange(oldValue, newValue)
+		}
 	}
 
 	private var mapView: some View {
